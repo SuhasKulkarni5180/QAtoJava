@@ -32,7 +32,7 @@
 			<table>
 				<tbody>
 				<tr>
-					<td><input type="text" name="accountnumber"></td>
+					<td>Account Number :</td><td><input type="text" name="accountnumber"></td>
 				</tr>
 									
 					<tr>

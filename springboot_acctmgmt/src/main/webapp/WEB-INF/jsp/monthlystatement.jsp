@@ -29,15 +29,27 @@
 
 <hr/>
 
-<table>
+		<a href="showMenu"> Home </a>
+		<br/><br/>
 
+<table>
+				<tr>
+					<th>Cust ID</th>
+					<th>Transaction type</th>
+					<th>Amount</th>
+					<th>Create Date</th>
+				</tr>
+				
+				
+				
+				
 				<core:forEach var="model" items="${customeroutput}">
 							
 					<tr>
-						<td>Cust ID: ${model.cusid}</td>
-						<td>Transaction type: ${model.transType} </td>
-						<td>Amount: ${model.amount} </td>
-						<td>Create Date: ${model.createDate} </td>
+						<td>${model.cusid}</td>
+						<td>${model.transType} </td>
+						<td>${model.amount} </td>
+						<td>${model.date} </td>
 						
 					</tr>
 				

@@ -27,11 +27,14 @@
 		</div>
 	</div>
 	
+	<a href="showMenu"> Home </a>
+	<br/><br/><br/>
+	
 	<h3>New account created Successfully</h3>
-	<h4> Customer ID :</h4>${newaccount.cusid}
-	<h4> Account Number :</h4>${newaccount.accountNumber}
-	<h4> Account Type :</h4>${newaccount.accountType}
-	<h4> Balance :</h4>${newaccount.balance}
+	<h5> Customer ID :</h5>${newaccount.cusid}
+	<h5> Account Number :</h5>${newaccount.accountNumber}
+	<h5> Account Type :</h5>${newaccount.accountType}
+	<h5> Balance :</h5>${newaccount.balance}
 					
 	
 

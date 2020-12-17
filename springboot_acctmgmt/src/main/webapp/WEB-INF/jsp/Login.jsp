@@ -33,18 +33,11 @@
 	<table>
 	
 		<tr>
-		<td>User Name : <input type="text" name=userName />	</td>
-		
-		</tr>
-		
-		
+		<td>User Name : <input type="text" name=userName />	</td>	
+		</tr>		
 		<tr>
-			<td>Password :  <input type="text" name="pwd" /></td>
-		</tr>
-			
-		<tr>
-			<td> <br/>	</td>
-		</tr>
+		<td>Password :  <input type="text" name="pwd" /></td>
+		</tr>			
 		
 		<tr>
 			<td><input type="submit" name="Submit" />	</td>

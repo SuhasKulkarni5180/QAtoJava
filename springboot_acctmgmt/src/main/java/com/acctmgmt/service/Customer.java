@@ -4,20 +4,16 @@ package com.acctmgmt.service;
 import java.util.List;
 
 import com.acctmgmt.dto.BankAccountOutputDto;
-import com.acctmgmt.dto.BankTransactionInputDto;
+
 import com.acctmgmt.dto.BankTransactionsOutputDto;
-import com.acctmgmt.dto.CustomerOutputDto;
 import com.acctmgmt.dto.UsersOutputDto;
-import com.acctmgmt.entity.BankTransaction;
-import com.acctmgmt.repository.BankTransactionRepository;
+
 
 public interface Customer {
 	
 	
 	public BankAccountOutputDto getBalance(int i);
 
-
-	public List<CustomerOutputDto> getyearlyStatement(Integer cusid, int year);
 
 	public String login(String usrName, String pwd);
 
@@ -33,6 +29,9 @@ public interface Customer {
 	public List<BankTransactionsOutputDto> getminiStatement(Long acctNumber);
 
 	public List<BankTransactionsOutputDto> getmonthlyStatement(Long acct, Integer month);
+
+
+	public List<BankTransactionsOutputDto> getyearlyStatement(Long acct, Integer year);
 
 
 

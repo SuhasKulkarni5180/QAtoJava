@@ -31,8 +31,10 @@
 		<div id="content">
 		
 			<!--  add our html table here -->
-		
-		
+		<div class="topnav-right">
+				<a href="login"> Logout </a>
+				<br/><br/>
+		</div>
 			<table>
 				<tr>
 					<th></th>

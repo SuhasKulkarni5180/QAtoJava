@@ -72,8 +72,9 @@ public class CustomerImpl implements Customer{
 		output.setUsername(user.getUserName());
 		output.setPassword(user.getPassword());
 		output.setId(user.getId());
-	
-		return output;
+		output.setUsername(user.getUserName());
+		output.setPassword(user.getPassword());
+	return output;
 	}
 	
 
@@ -97,9 +98,11 @@ public class CustomerImpl implements Customer{
 		
 		BankAccount acc = new BankAccount();
 		Double d = Double.parseDouble(amount);
+		Date dateobj = new Date();
 		acc.setBalance(d);
 		acc.setAcctType(account);
 		acc.setCusid((long) cusid);
+		acc.setCreateDate(dateobj);
 		return acc;
 		
 	}
@@ -111,6 +114,7 @@ public class CustomerImpl implements Customer{
 		output.setAccountType(accountOutputDto.getAcctType());
 		output.setBalance(accountOutputDto.getBalance());
 		output.setCusid(accountOutputDto.getCusid());
+		
 		
 		return output;
 		
@@ -182,7 +186,6 @@ public class CustomerImpl implements Customer{
 			BankTransactionsOutputDto bankTransaction = this.converToBankTransactionOutputDto(ministatement);
 			bankTransactionOutputDtos.add(bankTransaction);
 		}
-		bankTransactionOutputDtos= bankTransactionOutputDtos.subList(7,1);
 		
 		return bankTransactionOutputDtos;
 	}
@@ -203,21 +206,22 @@ public class CustomerImpl implements Customer{
 			}
 			
 			}
+			return bankTransactionOutputDtos;
 	
-		return customerOutputDtos;
+	
 	}
 
 	@Override
 	@Transactional
-	public List<CustomerOutputDto> getyearlyStatement(Integer cusid, int year) {
-		List<CustomerOutputDto> customerOutputDtos = new ArrayList<>();
-		List<BankTransaction> yearly=repository.findByCustomerid(cusid);
+	public List<BankTransactionsOutputDto> getyearlyStatement(Long acct,Integer year) {
+		List<BankTransactionsOutputDto> customerOutputDtos = new ArrayList<>();
+		List<BankTransaction> yearly=repository.findByAccountNumber(acct);
 		
 		for(BankTransaction bt : yearly) {
 			@SuppressWarnings("deprecation")
 			int transaYear = bt.getCreateDate().getYear();
 			if(transaYear + 1900 == year) {
-				CustomerOutputDto customerOutputDto = this.convertEntityToOutputDto(bt);
+				BankTransactionsOutputDto customerOutputDto = this.converToBankTransactionOutputDto(bt);
 				customerOutputDtos.add(customerOutputDto);
 			}
 		}
@@ -265,12 +269,13 @@ public class CustomerImpl implements Customer{
 	public BankAccountOutputDto createNewAccount(String account, String amount, int cusid) {
 		// TODO Auto-generated method stub
 		
-		BankAccount newAccount = this.convertToBankAccountInputDto(account, amount,cusid);
+		BankAccount newAccount = this.convertToBankAccountInputDto(account,amount,cusid);
 		BankAccount accountOutputDto= this.bankaccountservice.save(newAccount);
-		
+
 		BankAccountOutputDto bankAccountOutputDto =this.convertEntityToOutputBankAccountDto(accountOutputDto);
-		
-		
+		Long accountnumber=accountOutputDto.getId();
+		BankTransaction trans= this.convertToBankTransactionsInputDto(accountnumber, "Initial", Double.parseDouble(amount)); 
+		this.repository.save(trans);
 		return bankAccountOutputDto;
 	}
 

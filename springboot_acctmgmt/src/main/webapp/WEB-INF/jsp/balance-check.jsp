@@ -31,20 +31,25 @@
 		<h3>Balance Summary</h3>
 	
 		<div id="content">
+		
+		<a href="showMenu"> Home </a>
+		<br/><br/>
+		
 
 			<!--  add our html table here -->
 		<form action="balance" method="Get">
 			<table>
 			
-				<tr>Account number :<td><input type="text" name="accountnumber" /></td>
-				
-
-					<td><input type="submit" name="Submit" /></td>
-				</tr>
 				<tr>
-				       <td></td> 
-
+				<td>Account number :</td><td><input type="text" name="accountnumber" /></td>
+				
 				</tr>
+				
+				<tr>
+				<td><td><input type="submit" name="Submit" /></td></td>
+				</tr>
+				
+				
 				<tr>
 					<th>Account Type :  ${customeroutput.accountType} </th> 
 					<th>Balance : ${customeroutput.balance} </th>

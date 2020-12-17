@@ -8,6 +8,7 @@ public class BankAccountOutputDto {
 	private Long cusid;
 
 
+
 	public Long getAccountNumber() {
 		return accountNumber;
 	}

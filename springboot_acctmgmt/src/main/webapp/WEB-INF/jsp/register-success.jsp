@@ -26,9 +26,15 @@
 			<h2>IBS - Integrated Banking System</h2>
 		</div>
 	</div>
+	<br/>	
+	<a href="login"> Login </a>
 	
 	<h3>User registration Success full</h3>
-	<h4> Customer ID :</h4>${register.id}
+	<h5> Customer ID : ${register.id}</h5>
+	<h5> User Name : ${register.username}</h5>
+	<h5> Password : ${register.password}</h5>
+	
+	
 					
 	
 

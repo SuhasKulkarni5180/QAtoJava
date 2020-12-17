@@ -11,7 +11,8 @@ table {
 	width:72%;
 }
  
-th {
+th{
+	
 	border-bottom:1px solid gray;
 	background:none repeat scroll 0 0 #09c332;
 	padding:10px;
@@ -44,4 +45,14 @@ tr:nth-child(odd) {background: #BBBBBB}
 	
 	margin-bottom: 15px;
 	background: #cccccc;
+}
+
+.topnav-right{
+	float:right;
+	text-align:center;
+
+}
+td{
+
+	padding:5px;
 }

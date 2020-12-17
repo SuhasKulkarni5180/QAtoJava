@@ -111,10 +111,10 @@ public class CustomerController {
 	
 		
 	@GetMapping("/yearly")
-	public String getyearlyStatement(@RequestParam("year") String year,Model model){
+	public String getyearlyStatement(@RequestParam("accountnumber")String acctNumber,@RequestParam("year") String year,Model model){
 		
 		Integer Cusid =1;
-		List<BankTransactionsOutputDto> customerOutputDto = this.service.getyearlyStatement(Cusid, Integer.parseInt(year));
+		List<BankTransactionsOutputDto> customerOutputDto = this.service.getyearlyStatement(Long.parseLong(acctNumber), Integer.parseInt(year));
 		model.addAttribute("yearly",customerOutputDto);
 		
 

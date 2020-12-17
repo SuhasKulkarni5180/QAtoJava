@@ -31,7 +31,8 @@
 		<h3>Yearly Statement </h3>
 		<div id="content">
 			<!--  add our html table here -->
-		
+				<a href="showMenu"> Home </a>
+				<br/><br/>
 			<table>
 				<tr>
 					<th>Customer ID</th>
@@ -46,7 +47,7 @@
 					<tr>
 	
 						<td>${model.cusid}</td>
-						<td>${model.createDate} </td>
+						<td>${model.date} </td>
 						<td>${model.transType} </td>
 						<td>${model.amount} </td>
 						

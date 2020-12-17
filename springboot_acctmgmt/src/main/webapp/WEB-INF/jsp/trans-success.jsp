@@ -26,6 +26,8 @@
 			<h2>IBS - Integrated Banking System</h2>
 		</div>
 	</div>
+	<a href="showMenu"> Home </a>
+	<br/><br/><br/>
 	
 	<h3>User registration Success full</h3>
 	<h4> Customer ID :</h4>${trans.id}

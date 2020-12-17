@@ -29,9 +29,10 @@
 	<div id="container">
 		<h3>Mini Statement </h3>
 		<div id="content">
-		<h6>Last Five Trasactions </h6>
 			<!--  add our html table here -->
-		
+			
+			<a href="showMenu"> Home </a>
+			<br/><br/><br/>
 			<table>
 				<tr>
 					<th>Transaction ID</th>
