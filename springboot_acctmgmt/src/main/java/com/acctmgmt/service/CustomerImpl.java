@@ -18,18 +18,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.acctmgmt.dto.BankAccountOutputDto;
 import com.acctmgmt.dto.BankTransactionInputDto;
 import com.acctmgmt.dto.BankTransactionsOutputDto;
-
+import com.acctmgmt.dto.CardDetailsOutputDto;
+import com.acctmgmt.dto.NewRegistrationOutputDto;
 import com.acctmgmt.dto.UsersOutputDto;
 import com.acctmgmt.entity.BankAccount;
 import com.acctmgmt.entity.BankTransaction;
+import com.acctmgmt.entity.CardDetails;
+import com.acctmgmt.entity.NewRegistration;
 import com.acctmgmt.entity.Users;
 import com.acctmgmt.repository.BankAccountRepository;
 import com.acctmgmt.repository.BankTransactionRepository;
-
+import com.acctmgmt.repository.CardsRepository;
+import com.acctmgmt.repository.NewRegistrationRepository;
 import com.acctmgmt.repository.UsersRepository;
-
-
-
 
 
 @Component
@@ -44,6 +45,12 @@ public class CustomerImpl implements Customer{
 	
 	@Autowired
 	private BankAccountRepository bankaccountservice;
+	
+	@Autowired
+	private NewRegistrationRepository registerservice;
+	
+	@Autowired
+	private CardsRepository cardsservice;
 
 	
 	//utility classes
@@ -66,31 +73,33 @@ public class CustomerImpl implements Customer{
 
 
 	
-	private UsersOutputDto convertToUserOutputDto(Users user){
+	private NewRegistrationOutputDto convertToNewRegistrationOutputDto(NewRegistration register){
 		
-		UsersOutputDto output = new UsersOutputDto();
-		output.setUsername(user.getUserName());
-		output.setPassword(user.getPassword());
-		output.setId(user.getId());
-		output.setUsername(user.getUserName());
-		output.setPassword(user.getPassword());
+		NewRegistrationOutputDto output = new NewRegistrationOutputDto();
+		output.setAppId(register.getId());
+		output.setFirstname(register.getFirstName());
+		Long l =register.getStatus();
+		if(l==1) {
+			output.setStatus("Not Approved");
+		}
+
 	return output;
 	}
 	
 
 	
-	private Users convertToUserInputDto(String firstname, String lastname, String middlename, String email, String phone) {
-		Users user = new Users();
-		user.setFirstName(firstname);
-		user.setLastName(lastname);
-		user.setMiddleName(middlename);
-		user.setEmail(email);
-		user.setMobile(phone);
-		user.setUserName(firstname.substring(0,4));
-		user.setPassword(firstname.substring(0,4)+phone.substring(0,4));
-		user.setRole("customer");
-	
-		return user;
+	private NewRegistration convertToNewRegistrationInputDto(String firstname, String lastname, String middlename, String email, String phone,String identity) {
+		NewRegistration register = new NewRegistration();
+		register.setFirstName(firstname);
+		register.setLastName(lastname);
+		register.setMiddleName(middlename);
+		register.setEmail(email);
+		register.setMobile(phone);
+		//register.setUserName(firstname.substring(0,4));
+		//register.setPassword(firstname.substring(0,4)+phone.substring(0,4));
+		register.setStatus((long)1);
+		register.setIdentity(identity);
+		return register;
 		
 		
 	}
@@ -146,6 +155,14 @@ public class CustomerImpl implements Customer{
 		transaction.setId(trans.getId());
 		return transaction;
 		
+		
+	}
+	private UsersOutputDto convertToUserOutPutDto(Users user) {
+		
+		UsersOutputDto login = new UsersOutputDto();
+		login.setUsername(user.getUserName());
+		login.setPassword(user.getPassword());
+		return login;
 		
 	}
 	
@@ -234,9 +251,8 @@ public class CustomerImpl implements Customer{
 	public String login(String usrName, String pwd) {
 		
 		Users user = userservice.findByUserName(usrName,pwd);
-		UsersOutputDto olduser =this.convertToUserOutputDto(user);
-		
-		
+		UsersOutputDto olduser =this.convertToUserOutPutDto(user);
+
 		if((olduser.getUsername()).equals(usrName)&&(olduser.getPassword().equals(pwd))){	
 			
 			return "success";
@@ -247,19 +263,21 @@ public class CustomerImpl implements Customer{
 			
 			return "failure";
 		}
-	
+
+		
+		
 	}
 
 
 
 	@Override
-	public UsersOutputDto register(String firstname, String lastname, String middlename, String email, String phone) {
+	public NewRegistrationOutputDto register(String firstname, String lastname, String middlename, String email, String phone,String identity) {
 		
-		Users newUser= this.convertToUserInputDto(firstname,lastname,middlename,email,phone);
-		Users registered=this.userservice.save(newUser);
-		UsersOutputDto userOutputDto = this.convertToUserOutputDto(registered);
+		NewRegistration newUser= this.convertToNewRegistrationInputDto(firstname,lastname,middlename,email,phone,identity);
+		NewRegistration registered=this.registerservice.save(newUser);
+		NewRegistrationOutputDto registerOutputDto = this.convertToNewRegistrationOutputDto(registered);
 		
-		return userOutputDto;
+		return registerOutputDto;
 	}
 
 
@@ -307,7 +325,31 @@ public class CustomerImpl implements Customer{
 		return bankTransOutputDto;
 	}
 
-	
+	@Override
+	@Transactional
+	public CardDetailsOutputDto getCardDetails(Long Cusid) {
+		
+		
+		//List<CardDetailsOutputDto> cardDetailsOutputDtos = new ArrayList<CardDetailsOutputDto>();
+		CardDetails card = this.cardsservice.getAll(Cusid);
+		CardDetailsOutputDto cardDetailsOutputDto = this.convertToCardDetailsOutputDto(card);
+
+		return cardDetailsOutputDto;
+	}
+
+
+
+	private CardDetailsOutputDto convertToCardDetailsOutputDto(CardDetails card) {
+		// TODO Auto-generated method stub
+		CardDetailsOutputDto details =new CardDetailsOutputDto();
+		//details.setCusid(card.getCusid());
+		details.setCardnumber(card.getCardnumber());
+		details.setBalance(card.getBalance());
+		details.setExpirydate(card.getExpirydate());
+		details.setStatus(card.getStatus());
+		
+		return details;
+	}
 	
 
 

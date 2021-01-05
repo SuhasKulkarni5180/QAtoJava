@@ -51,7 +51,11 @@
 		
 		<tr>
 			<td>Phone :<input type="text" name=phone />	</td>
-		</tr>			
+		</tr>	
+		
+		<tr>
+			<td>National Identity :<input type="text" name=nationalidentity />	</td>
+		</tr>		
 
 		<tr>
 			<td><input type="submit" name="Submit" />	</td>

@@ -23,17 +23,17 @@
 		</div>
 	</div>
 	<div class="topnav-right">
-		<a href="executivelogin"> Executive Login </a>
+		<a href="login"> User Login </a>
 	<br/><br/>
 	
 	</div>
 	<div id="container">
 	
-	<h3>User Login</h3>
+	<h3>Executive Login</h3>
 
 	
 	
-	<form action="user" method="POST">
+	<form action="executive" method="Post">
 		
 	<table>
 	

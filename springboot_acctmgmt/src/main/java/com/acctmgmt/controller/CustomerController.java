@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.acctmgmt.dto.BankAccountOutputDto;
 import com.acctmgmt.dto.BankTransactionInputDto;
 import com.acctmgmt.dto.BankTransactionsOutputDto;
-
+import com.acctmgmt.dto.CardDetailsOutputDto;
+import com.acctmgmt.dto.NewRegistrationOutputDto;
 import com.acctmgmt.dto.UsersOutputDto;
 import com.acctmgmt.repository.BankTransactionRepository;
 import com.acctmgmt.service.Customer;
@@ -148,12 +149,12 @@ public class CustomerController {
 	
 	@GetMapping("/registrationform")
 	public String register(@RequestParam ("firstName") String firstname,@RequestParam("lastName") String lastname,@RequestParam("middleName") String middlename,
-							@RequestParam("email") String email,@RequestParam("phone") String phone, Model model) {
+							@RequestParam("email") String email,@RequestParam("phone") String phone,@RequestParam("nationalidentity")String identity, Model model) {
 		
 		// save the customer using our service
-		UsersOutputDto userOutputDto = this.service.register(firstname,lastname,middlename,email,phone);
+		NewRegistrationOutputDto userOutputDto = this.service.register(firstname,lastname,middlename,email,phone,identity);
 		model.addAttribute("register",userOutputDto);
-		return "register-success";
+		return "register-status";
 	}
 	
 	
@@ -175,6 +176,26 @@ public class CustomerController {
 		return "newaccountcreated";
 		
 		
+	}
+	
+ /////////Revati
+	
+	
+	@GetMapping("/cards")
+	public String cards(){
+		return "cards";
+	}
+	@GetMapping("/credit")
+	public String getCardDetails(@RequestParam("cusid") String Cusid,Model model){
+		CardDetailsOutputDto cardDetailsOutputDto=this.service.getCardDetails(Long.parseLong(Cusid));
+		model.addAttribute("cards",cardDetailsOutputDto);
+		return "debit";
+	}
+	
+	
+	@GetMapping("/debit")
+	public String debit() {
+		return "debit";
 	}
 	
 		

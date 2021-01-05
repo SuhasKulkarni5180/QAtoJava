@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Users {
+public class NewRegistration {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,39 +16,9 @@ public class Users {
 	private String middleName;
 	private String email;
 	private String mobile;
-	private String role;
-	private String userName;
-	private String password;
+	private Long status;
 	private String identity;
 	
-	
-	
-	public String getIdentity() {
-		return identity;
-	}
-	public void setIdentity(String identity) {
-		this.identity = identity;
-	}
-
-	
-	public String getMiddleName() {
-		return middleName;
-	}
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public Long getId() {
 		return id;
 	}
@@ -67,6 +37,12 @@ public class Users {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	public String getMiddleName() {
+		return middleName;
+	}
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -79,12 +55,21 @@ public class Users {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public String getRole() {
-		return role;
+
+	public Long getStatus() {
+		return status;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setStatus(Long status) {
+		this.status = status;
+	}
+
+	public String getIdentity() {
+		return identity;
+	}
+	public void setIdentity(String identity) {
+		this.identity = identity;
+	}
+	
 	
 
-	}
 }
